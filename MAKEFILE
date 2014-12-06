@@ -1,0 +1,12 @@
+CFLAGS = -O
+
+key : key.o dj_vkbd.o
+	gcc $(CFLAGS) $^ -o $@ -lpc
+	strip $@
+	coff2exe $@
+
+key.o : key.c dj_vkbd.h keycodes.h vktype.h
+	gcc $(CFLAGS) -c key.c
+
+ll_kbd.o : dj_vkbd.c vktype.h
+	gcc $(CFLAGS) -c dj_vkbd.c
